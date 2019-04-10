@@ -1,0 +1,15 @@
+# this docker use for hosted your  nodejs app in container
+# just add your service name  to add service to managed in this tools
+# author Gerald Halomoan Samosir
+
+version: '3'
+services:
+  test-project:
+    container_name: testProject
+    image: test-project-app
+    build: .
+    network_mode: host
+    ports:
+      # {host port} : {container port}
+      - '3000:80'
+    tty: true
