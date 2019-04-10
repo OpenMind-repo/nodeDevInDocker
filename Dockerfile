@@ -23,3 +23,6 @@ RUN ln -sf  /bin/versions/node/v8.12.0/bin/pm2 /usr/bin/pm2
 RUN ln -sf  /bin/versions/node/v8.12.0/bin/pm2-docker /usr/bin/pm2-docker
 RUN ln -sf  /bin/versions/node/v8.12.0/bin/pm2-dev /usr/bin/pm2-dev
 RUN ln -sf  /bin/versions/node/v8.12.0/bin/pm2-runtime /usr/bin/pm2-runtime
+
+#create app folder
+RUN mkdir /APP

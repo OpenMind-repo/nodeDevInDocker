@@ -8,8 +8,12 @@ services:
     container_name: testProject
     image: test-project-app
     build: .
-    network_mode: host
+    network_mode: bridge
+    volumes:
+      - ./ProjectList/testProject:/App
+    working_dir: /App
+    command: npm start  
     ports:
       # {host port} : {container port}
-      - '3000:80'
+      - 2000:3000
     tty: true
