@@ -11,7 +11,7 @@ const options = {
 };
 const port = 3000;
 app.get('/',(req,res)=> res.json({message:' http2 awesome'}));
-const server = http2.createServer(options,app);
+// const server = http2.createServer(options,app);
 
 spdy
   .createServer(options, app)
