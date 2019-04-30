@@ -1,37 +1,25 @@
 const express = require('express');
-const app = express();
+const http2 = require('http2');
+const spdy = require('spdy');
+// const http = require('http');
+const https =  require('https');
 const fs = require('fs');
+const app = express();
+const options = {
+    key: fs.readFileSync('/APP/SSL/localhost-privkey.pem'),
+    cert: fs.readFileSync('/APP/SSL/localhost-cert.pem')
+};
+const port = 3000;
+app.get('/',(req,res)=> res.json({message:' http2 awesome'}));
+const server = http2.createServer(options,app);
 
-
-app.get('/ping', (req,res)=>{
-    res.status(200).json({
-        message:'pong'
-    });
-});
-app.get('/test', (req,res)=>{
-    res.json({
-        message:'test'
-    })
-});
-
-app.get('/test2', (req, res)=>{
-    res.json({
-        message: 'test 2'
-    })
-});
-
-app.get('/test3', (req, res)=>{
-    fs.writeFile("./test", "Hey there!", function(err) {
-        if(err) {
-            return console.log(err);
-        }
-    
-        console.log("The file was saved!");
-    }); 
-    res.json({
-        message: 'test 3'
-    })
-});
-
-
-app.listen(3000 , ()=> console.log(3000) );
+spdy
+  .createServer(options, app)
+  .listen(port, (error) => {
+    if (error) {
+      console.error(error)
+      return process.exit(1)
+    } else {
+      console.log('Listening on port: ' + port + '.')
+    }
+  })

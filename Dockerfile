@@ -3,6 +3,13 @@ FROM ubuntu:18.04
 
 ENV NVM_VERSION=0.33.8
 ENV NODE_VERSION=8.12.0
+#setup for openssl
+ENV DOMAIN_NAME=geraldsamosir.com
+ENV ORGANIZATION=gerald
+ENV DEPARTMENT=IT
+ENV CITY=JAKARTASELATAN
+ENV PROVINCE=JAKARTA
+ENV COUNTRY=ID
 
 RUN apt-get update && \
     apt-get -y upgrade && \
@@ -30,3 +37,12 @@ RUN ln -sf  /bin/versions/node/v$NODE_VERSION/bin/pm2-runtime /usr/bin/pm2-runti
 
 #create app folder
 RUN mkdir /APP
+
+# add openssl for generate cert's
+RUN apt-get install openssl
+RUN mkdir /APP/SSL
+RUN touch /APP/SSL/localhost-cert.pem
+RUN touch /APP/SSL/localhost-privkey.pem
+
+RUN openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' \
+  -keyout /APP/SSL/localhost-privkey.pem -out /APP/SSL/localhost-cert.pem

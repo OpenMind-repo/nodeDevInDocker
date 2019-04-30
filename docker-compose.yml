@@ -13,7 +13,6 @@ services:
     volumes:
       - ./ProjectList/testProject:/App
     working_dir: /App
-    command: npm start  
     ports:
       # {host port} : {container port}
       - 2000:3000

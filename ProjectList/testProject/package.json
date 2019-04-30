@@ -1,16 +1,16 @@
 {
-  "name": "testproject",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --watch --no-daemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cuid": "^2.1.6",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "http2": "^3.3.7",
+    "spdy": "^4.0.0"
   }
 }
